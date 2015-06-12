@@ -1,0 +1,39 @@
+ 
+	<!-- <span ng-bind="editCtrl.title"></span> -->
+<!--  <div data-ng-controller="help">
+  <div id="messages" class="alert alert-success" data-ng-show="messages" data-ng-bind="messages"></div>
+  <div data-ng-show="progress.active()" style="color: red; font-size: 50px;">Sending&hellip;</div>
+  <form name="helpForm" novalidate role="form">
+    <div class="form-group">
+      <label for="name">Enter Service name</label>
+      <span class="label label-danger" data-ng-show="submitted && helpForm.name.$error.required">*</span>
+      <input type="text" name="name" data-ng-model="name" class="form-control" required />
+    </div>
+
+    <button data-ng-disabled="progress.active()" data-ng-click="submit(helpForm)" class="btn btn-default">Submit</button>
+  </form>
+ </div>
+</div> -->
+
+
+<div>
+	<h2> Service Management tool</h2>
+	<h3> Enter names of services for Resource Based Financing (RBF) </h3>
+	 
+	<div ng-repeat="service in editCtrl.getServices()"> 
+		<label> Service Name <input type="text" ng-model="service.name"> </label>
+		<label> ShortName <input type="text" ng-model="service.shortName"> </label>
+		<label> Code <input type="text" ng-model="service.code">  </label>
+		<label>Type<select type="text" ng-model="service.type"> 
+			<option value="int">int</option> <option value="string">string</option></select> 
+		</label> 
+		<label>Aggregation Operator<select type="text" ng-model="service.aggregationOperator"> 
+			<option value="sum">sum</option> </select> 
+		</label> 
+		<button class="btn btn-primary" type="button" title="click here to enter more service names" ng-if="$last" ng-click="editCtrl.add()"> + </button> 
+	</div>
+	<button ng-click="editCtrl.save()" class="btn btn-primary"> Save to click</button>
+	<toast></toast>
+</div>
+
+ 

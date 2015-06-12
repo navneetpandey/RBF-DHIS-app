@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+     <!-- build:css css/app.css -->
+    <link href="css/app.css" rel="stylesheet" type="text/css" />
+    <link href="../lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="../lib/ngtoast/dist/ngToast.css" rel="stylesheet" type="text/css" />
+     <!-- endbuild -->
+</head>
+<body data-ng-controller="appController as appCtrl">
+
+    <div>
+      <!--   <h1 data-ng-bind="appCtrl.title"></h1> -->
+      <h1> <span class="label label-default" data-ng-bind="appCtrl.title"></span></h1> 
+
+        <ng-view></ng-view>
+    </div>
+
+    <!-- build:js js/lib.js -->
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/angular/angular.js"></script>
+    <script src="../node_modules/angular-route/angular-route.js"></script>
+    <script src="../lib/ngtoast/dist/ngToast.js"></script>
+    <script src="../lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="../lib/angular-sanitize/angular-sanitize.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/app.js -->
+    <script src="app.js"></script>
+    <script src="app/app.controller.js"></script>
+    <script src="edit/edit.controller.js"></script>
+    <script src="dashboard/dashboard.controller.js"></script>
+    <!-- endbuild -->
+</body>
+</html>
