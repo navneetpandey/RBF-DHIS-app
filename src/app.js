@@ -12,6 +12,11 @@
                     controller: 'editController',
                     controllerAs: 'editCtrl'
                 })
+                .when('/qualityAdmin', {
+                    templateUrl: 'qualityAdmin/parameterAdministration.html',
+                    controller: 'qualityController',
+                    controllerAs: 'qualityCtrl'
+                })
                 .otherwise({
                     templateUrl: 'dashboard/dashboard.html',
                     controller: 'dashboardController',

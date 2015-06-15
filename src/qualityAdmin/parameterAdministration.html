@@ -1,0 +1,50 @@
+<style type="text/css">
+	#table1 {
+		counter-reset: rowNumber;
+	}
+
+	#table1 tbody tr {
+		counter-increment: rowNumber;
+	}
+
+	#table1 tr td:first-child::before {
+		content: counter(rowNumber); 
+	}
+
+</style>
+<div>
+	<h2> Quality parameter management</h2> 
+
+
+	<table id="table1" class="table table-striped">
+	
+		<thead>
+			<tr>
+				<th>Number</th>
+				<th>Service Name</th>
+				<th>ShortName</th>
+				<th>Code</th>
+				<!-- <th>Type</th> -->
+				<!-- <th>Aggregation Operator</th> -->
+			</tr>
+			</thead>
+		<tbody>
+			<tr ng-repeat="service in qualityCtrl.getServices()"> 
+				 	<td> </td>
+					<td><input type="text" placeholder="Parameter" ng-model="service.name"> </td>
+					<td> <input type="text" placeholder="ShortName" ng-model="service.shortName"> </td>
+					<td><input type="text" placeholder="Code" ng-model="service.code">  </td>
+					<!-- <td><select type="text" ng-model="service.type"> 
+						<option value="int">int</option> <option value="string">string</option></select> 
+					</td> -->
+					<!-- <td><select type="text" ng-model="service.aggregationOperator"> 
+						<option value="sum">sum</option> </select> 
+					</td>  -->
+					<td>
+					<button class="btn btn-primary" type="button" title="click here to enter more service names" ng-if="$last" ng-click="qualityCtrl.add()"> + </button> 
+				 	</td>
+				</tr>
+				</table>
+		<button ng-click="qualityCtrl.save()" class="btn btn-primary"> Save to click</button>
+		<toast></toast>
+	</div>
