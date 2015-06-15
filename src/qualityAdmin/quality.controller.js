@@ -4,13 +4,13 @@
     angular
         .module('RBF.app')
         .controller('qualityController', qualityController)
-        .factory('services', services)
+        .factory('services1', services1)
         .factory('categoryOptionService', categoryOptionService);
 
     /* @ngInject */
-    function qualityController(services, ngToast, defaultCategoryComboId) {
+    function qualityController(services1, ngToast) {
         var vm = this;
-        vm.title = 'editController';
+        vm.title = 'qualityController';
         vm.save = save;
         vm.add = add;
         vm.getServices = getServices;
@@ -20,10 +20,10 @@
         }
 
         function getServices() {
-            return services.getServices();
+            return services1.getServices();
         }
         function save() {
-            services.save()
+            services1.save()
             .success(function (data, status, headers, config) {
                 ngToast.create(data.importCount.imported);
             })
@@ -32,20 +32,26 @@
 
         }
         function add() {
-            services.addService('');
+            services1.addService('');
         }
 
     }
 
-    function categoryOptionService($http) {
+    function categoryOptionService($http, apiURL) {
         return {
             getDefault: function () {
-                return $http.get(apiURL + '/api/categoryCombos.json?filter=name:eq:default', {cache: true});
+                return $http.get(apiURL + '/api/categoryCombos.json?filter=name:eq:default', {cache: true})
+                    .then(function (response) {
+                                    return response.data.categoryCombos[0];
+                                })
+                                .catch(function (error) {
+                                    console.error(error);
+                                });
             }
         };
     }
 
-    function services($http, apiURL, $q) {
+    function services1($http, apiURL, $q, categoryOptionService) {
         var servicesList = [{
             name: '', shortName: '', code: '',
             type: 'int', aggregationOperator: 'sum', domainType: 'AGGREGATE',
@@ -61,7 +67,7 @@
         function addService() {
             servicesList.push({name: '', shortName: '', code: '',
             aggregationOperator: 'sum', type: 'int', domainType: 'AGGREGATE', formName: '',
-            numberType: 'number', categoryCombo: {id:'rZxWEfqkIJr'}});
+            numberType: 'number'});
         }
 
         function getServices() {
@@ -81,19 +87,18 @@
             servicesListToSave.forEach(function (dataElement) {
 
                 servicesWithAllTypes.push(addSuffixToDE(dataElement, '_ATR'));
-                servicesWithAllTypes.push(addSuffixToDE(dataElement, '_AVL')); 
-
+                servicesWithAllTypes.push(addSuffixToDE(dataElement, '_AVL'));
             });
-
-            
-            return $http.post(apiURL+ '/api/metadata/',
-                {dataElements: servicesWithAllTypes});
-            })
-            .catch(function (argument) {
-                //handle error
-            })
-
-            
+            return categoryOptionService.getDefault()
+                .then(function (defaultCategoryComboId) {
+                    servicesWithAllTypes.forEach(function (dataElement) {
+                         dataElement.categoryCombo = defaultCategoryComboId;
+                     });
+                    return $http.post(apiURL + '/api/metadata/', {dataElements: servicesWithAllTypes});
+                })
+                .catch(function (argument) {
+                    //handle error
+                });
 
             function addSuffixToDE(dataElement, argument) {
                 var dataElementCopy = angular.copy(dataElement);
