@@ -13,7 +13,7 @@
                     controllerAs: 'editCtrl'
                 })
                 .when('/qualityAdmin', {
-                    templateUrl: 'qualityAdmin/parameterAdministration.html',
+                    templateUrl: 'qualityAdmin/quality.html',
                     controller: 'qualityController',
                     controllerAs: 'qualityCtrl'
                 })
