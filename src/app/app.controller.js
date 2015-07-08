@@ -15,6 +15,13 @@
         ////////////////
 
         function activate() {
+            createDataElementGroup();
+        }
+
+        function createDataElementGroup($http) {
+            var apiURL = 'http://localhost:8080/dhis/';
+            var RBF_DE_GROUP = 'RBF_DE_GROUP';
+            return $http.post(apiURL + '/api/metadata/', {organisationUnitGroups: RBF_DE_GROUP});
         }
     }
 })();
