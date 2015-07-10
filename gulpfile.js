@@ -119,7 +119,7 @@ gulp.task('copy', function () {
     var ignore = require('gulp-ignore');
 
     return gulp.src(['./build/**/*.*'])
-        .pipe(ignore.exclude('*.webapp'))
+        // .pipe(ignore.exclude('*.webapp'))
         .pipe(gulp.dest(appDir));
 });
 
