@@ -15,6 +15,16 @@
         ////////////////
 
         function activate() {
+            window.loadOrganisationUnitGroup();
+            window.selectionTreeSelection.setMultipleSelectionAllowed(true);
+            //jscs:disable
+            window.selectedOrganisationUnitList__ = window.jQuery('#treeSelectedId');
+            //jscs:enable
+
+            //Clears old selection
+            window.selectionTree.clearSelectedOrganisationUnits();
+
+            window.selectionTree.buildSelectionTree();
         }
     }
 })();

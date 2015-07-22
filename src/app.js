@@ -17,6 +17,11 @@
                     controller: 'qualityController',
                     controllerAs: 'qualityCtrl'
                 })
+                .when('/dataEntry', {
+                    templateUrl: 'dataEntry/dataEntry.html',
+                    controller: 'dataEntryController',
+                    controllerAs: 'dataEntryCtrl'
+                })
                 .otherwise({
                     templateUrl: 'dashboard/dashboard.html',
                     controller: 'dashboardController',

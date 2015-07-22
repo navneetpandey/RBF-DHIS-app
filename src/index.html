@@ -2,11 +2,12 @@
 <html>
 <head>
     <title></title>
-     <!-- build:css css/app.css -->
-    <link href="css/app.css" rel="stylesheet" type="text/css" />
+    <!-- build:css css/app.css -->
+    <link href="../build/css/app.css" rel="stylesheet" type="text/css" />
     <link href="../lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="../lib/ngtoast/dist/ngToast.css" rel="stylesheet" type="text/css" />
-     <!-- endbuild -->
+    <!-- endbuild -->
+    <link type="text/css" rel="stylesheet" media="screen" href="../../dhis-web-commons/css/widgets.css"/>
 </head>
 <body data-ng-controller="appController as appCtrl">
 
@@ -26,12 +27,167 @@
     <script src="../lib/angular-sanitize/angular-sanitize.js"></script>
     <!-- endbuild -->
 
+    <script type="text/javascript" src="../../dhis-web-commons/oust/oust.js"></script>
+    <!--<script type="text/javascript" src="../../dhis-web-commons/oust/selectionTreeSelect.js"></script>-->
+    <script type="text/javascript">
+
+        var selectedOrganisationUnitList__;
+
+        function addSelectedOrganisationUnit__( id )
+        {
+            selectedOrganisationUnitList__.empty();
+            selectedOrganisationUnitList__.append('<option value="' + id + '" selected="selected">' + id + '</option>');
+        }
+
+        function selectOrganisationUnit__( ids )
+        {
+            selectedOrganisationUnitList__.empty();
+
+            if ( ids && ids.length > 0 )  {
+                selectedOrganisationUnitList__.append('<option value="' + ids[0] + '" selected="selected">' + ids[0] + '</option>');
+            }
+
+            byId('treeSelectedId').selectedIndex = 0;
+        }
+
+        function unSelectChildren()
+        {
+            jQuery.get('../../dhis-web-commons/oust/removeorgunit.action', {
+                children : true
+            }, function( xml )
+            {
+                selectedOrganisationUnitXML__(xml);
+            });
+        }
+
+        function selectChildren()
+        {
+            jQuery.get('../../dhis-web-commons/oust/addorgunit.action', {
+                children : true
+            }, function( xml )
+            {
+                selectedOrganisationUnitXML__(xml);
+            });
+        }
+
+        function selectOrganisationUnitAtLevel()
+        {
+            jQuery.get('../../dhis-web-commons/oust/addorgunit.action', {
+                level : getFieldValue('levelList')
+            }, function( xml )
+            {
+                selectedOrganisationUnitXML__(xml);
+            });
+        }
+
+        function unSelectOrganisationUnitAtLevel()
+        {
+            jQuery.get('../../dhis-web-commons/oust/removeorgunit.action', {
+                level : getFieldValue('levelList')
+            }, function( xml )
+            {
+                selectedOrganisationUnitXML__(xml);
+            });
+        }
+
+        function unSelectAllTree()
+        {
+            jQuery.get('../../dhis-web-commons/oust/clearSelectedOrganisationUnits.action', function( xml )
+            {
+                selectedOrganisationUnitXML__(xml);
+            });
+        }
+
+        function selectAllTree()
+        {
+            jQuery.get('../../dhis-web-commons/oust/selectallorgunit.action', function( xml )
+            {
+                selectedOrganisationUnitXML__(xml);
+            });
+        }
+
+        function selectOrganisationUnitByGroup()
+        {
+            jQuery.get('../../dhis-web-commons/oust/addorgunit.action', {
+                organisationUnitGroupId : getFieldValue('groupList')
+            }, function( xml )
+            {
+                selectedOrganisationUnitXML__(xml);
+            });
+        }
+
+        function unSelectOrganisationUnitByGroup()
+        {
+            jQuery.get('../../dhis-web-commons/oust/removeorgunit.action', {
+                organisationUnitGroupId : getFieldValue('groupList')
+            }, function( xml )
+            {
+                selectedOrganisationUnitXML__(xml);
+            });
+        }
+
+        function loadOrganisationUnitLevel()
+        {
+            jQuery.getJSON('../../dhis-web-commons-ajax-json/getOrganisationUnitLevels.action', function( json )
+            {
+                var levels = jQuery("#levelList");
+                levels.empty();
+                jQuery.each(json.levels, function( i, item )
+                {
+                    levels.append('<option value="' + item.level + '">' + item.name + '</option>');
+                });
+                jQuery("#selectionTreeContainer").fadeIn();
+            });
+        }
+
+        function loadOrganisationUnitGroup()
+        {
+            jQuery.getJSON('../../dhis-web-commons-ajax-json/getOrganisationUnitGroups.action', function( json )
+            {
+                var groups = jQuery("#groupList");
+                groups.empty();
+                jQuery.each(json.organisationUnitGroups, function( i, item )
+                {
+                    groups.append('<option value="' + item.id + '">' + item.name + '</option>');
+                });
+
+                loadOrganisationUnitLevel();
+            });
+        }
+
+
+    </script>
+    <script type="text/javascript">
+        window.isDefined = function (variable) {
+            return typeof variable !== "undefined";
+        }
+
+        window.selectionTreePath = '../../dhis-web-commons/oust/';
+
+        function selectedOrganisationUnitXML__( xml )
+        {
+            selectionTree.buildSelectionTree();
+        }
+    </script>
+
+    <!--
+    <script type="text/javascript" src="../../dhis-web-commons/javascripts/dhis2/dhis2.util.js"></script>
+    <script type="text/javascript" src="../../dhis-web-commons/javascripts/dhis2/dhis2.storage.js"></script>
+    <script type="text/javascript" src="../../dhis-web-commons/javascripts/dhis2/dhis2.storage.idb.js"></script>
+    <script type="text/javascript" src="../../dhis-web-commons/ouwt/ouwt.js"></script>
+    <script type="text/javascript">
+        window.dhis2BaseUrl = '../..';
+        window.organisationUnitTreePath = window.dhis2BaseUrl + "/dhis-web-commons/ouwt/";
+    </script>
+    -->
+
     <!-- build:js js/app.js -->
     <script src="app.js"></script>
     <script src="app/app.controller.js"></script>
     <script src="edit/edit.controller.js"></script>
     <script src="qualityAdmin/quality.controller.js"></script>
     <script src="dashboard/dashboard.controller.js"></script>
+    <script src="dataEntry/dataEntry.controller.js"></script>
     <!-- endbuild -->
 </body>
 </html>

@@ -5,3 +5,28 @@ body {
     width: $app-width;
   }
 }
+
+.toggle {
+	img {
+		overflow: hidden;
+	}
+
+	img:before {
+		  height: 9px;
+		  width: 9px;
+		  content: ' ';
+		  display: inline-block;
+	}
+
+	img[src="../images/colapse.png"] {
+		  background: url('../images/colapse.png');
+	}
+
+	img[src="../images/transparent.png"] {
+		  background: url('../images/transparent.png');
+	}
+
+	img[src="../images/expand.png"] {
+		  background: url('../images/expand.png');
+	}
+}
