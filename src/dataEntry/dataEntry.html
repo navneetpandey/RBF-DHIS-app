@@ -29,8 +29,22 @@
                     </div>
                 </td>
             </tr>
+            <tr>
+        <!--     <form>
+            <td> <button class="btn btn-primary" type="button" title="Add" ng-click="dataEntryCtrl.add()"> Add </button>  </td>
+            <td> <input type="text" placeholder="Parameter" title="Group name" ng-model="dataEntryCtrl.orgUnitGroupName"> </td>
+            <td> <input type="text" placeholder="Parameter" title="Group name (Short) "ng-model="dataEntryCtrl.setUGSName"> </td>
+            </form> -->
+            <form name="userForm">
+    			<td> Org Unit Group Name <input type="text" placeholder="OUGN" title="Group name" ng-model="setUGName" ng-model-options="{ getterSetter: true }">  
+    			Short Name <input type="text" placeholder="OUSN" title="Group name (Short) "ng-model="setUGSName" ng-model-options="{ getterSetter: true }"> 
+    			<button class="btn btn-primary" type="button" title="Add" ng-click="dataEntryCtrl.add()"> Add </button>  </td>
+            	<pre>Par1 = <span ng-bind="setUGName()"></span>, <span ng-bind="setUGSName()"></span></pre>
+  			</form>
+            </tr>
         </tbody>
     </table>
+
 </div>
 <!--
 // // jQuery(document).ready( function()

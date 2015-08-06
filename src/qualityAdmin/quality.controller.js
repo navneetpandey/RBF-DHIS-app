@@ -9,16 +9,18 @@
         .factory('categoryOptionService', categoryOptionService);
 
     /* @ngInject */
-    function qualityController(serviceLists, ngToast) {
+    function qualityController($http, serviceLists, ngToast, apiURL) {
         var vm = this;
         vm.title = 'qualityController';
+        getDataElements($http, apiURL);
         vm.save = save;
         vm.add = add;
         vm.getServices = getServices;
-        activate();
         var qualityServices = serviceLists('quality');
 
+        activate();
         function activate() {
+            // getDataElements(apiURL);
         }
 
         function getServices() {
@@ -144,6 +146,16 @@
                 }
             }
         };
+    }
+
+    function getDataElements($http, apiURL) {
+        $http.get(apiURL + '/api/dataElements.json', {cache: true})
+            .then(function (response) {
+                var dEs = response.data.dataElements;
+            })
+            .catch(function (error) {
+            console.log('couldn\'t able to get data value ' + error);
+        });
     }
 
 })();

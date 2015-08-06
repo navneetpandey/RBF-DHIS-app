@@ -22,7 +22,6 @@
             var apiURL = 'http://localhost:8080/dhis/';
             var RBF_DE_GROUP_SET = 'RBF_GROUPSET';
             var RBF_DE_GROUP = 'RBF_GROUP';
-            window.console.log('happy');
             $http.get(apiURL + '/api/organisationUnitGroupSets/?filter=name:eq:' + RBF_DE_GROUP_SET)
                 .then(function (orgUnitGroupSets) {
                     if (orgUnitGroupSets.data.organisationUnitGroupSets.length === 0) {
