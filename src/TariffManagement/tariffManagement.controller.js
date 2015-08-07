@@ -3,13 +3,13 @@
 
     angular
         .module('RBF.app')
-        .controller('dataEntryController', dataEntryController)
+        .controller('tariffManagementController', tariffManagementController)
         .factory('orguf', orgUnitGroupServices);
 
     /* @ngInject */
-    function dataEntryController(orguf, $http, $scope) {
+    function tariffManagementController(orguf, $http, $scope) {
         var vm = this;
-        vm.title = 'dataEntryController';
+        vm.title = 'tariffManagementController';
         var orguS = orguf();
         vm.add = orguS.addOrgUnitGroup;
         $scope.setUGName = orguS.setorgUnitGroupName;

@@ -1,0 +1,48 @@
+<!-- <div>
+<a ng-href="#/edit"> Quantity administration</a>
+<a ng-href="#/tariffManagement"> Tariff Management</a>
+</div> --> 
+<div>
+	<table>
+        <thead>
+            <tr>
+                <th colspan="2">Traffic group management
+                    <select id="treeSelectedId" name="treeSelectedId" #if( $required ) class="{validate:{required:true}}" #end multiple="multiple" style="display:none"/>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div style="width:100%">
+                        <div id="selectionTreeContainer" style="display:none;">
+                            <input type="button" value=" select_at_level" onclick="selectOrganisationUnitAtLevel()" style="width:10em"/>
+                            <select id="levelList" name="levelList" style="width:10em"/>
+                            <input type="button" value="unselect_at_level" onclick="unSelectOrganisationUnitAtLevel()" style="width:10em"/>
+                            <input type="button" value="unselect_all" onclick="unSelectAllTree()" style="width:10em"/><br>
+                            <input type="button" value="elect_in_group" onclick="selectOrganisationUnitByGroup()" style="width:10em">
+                            <select id="groupList" name="groupList" style="width:10em"/>
+                            <input type="button" value="unselect_in_group" onclick="unSelectOrganisationUnitByGroup()" style="width:10em"> 
+                            <input type="button" value="select_children" onclick="selectChildren()" style="width:10em"/>   
+                            <div id="selectionTree"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+        <!--     <form>
+            <td> <button class="btn btn-primary" type="button" title="Add" ng-click="tariffCtrl.add()"> Add </button>  </td>
+            <td> <input type="text" placeholder="Parameter" title="Group name" ng-model="tariffCtrl.orgUnitGroupName"> </td>
+            <td> <input type="text" placeholder="Parameter" title="Group name (Short) "ng-model="tariffCtrl.setUGSName"> </td>
+            </form> -->
+            <form name="userForm">
+    			<td> Org Unit Group Name <input type="text" placeholder="OUGN" title="Group name" ng-model="setUGName" ng-model-options="{ getterSetter: true }">  
+    			Short Name <input type="text" placeholder="OUSN" title="Group name (Short) "ng-model="setUGSName" ng-model-options="{ getterSetter: true }"> 
+    			<button class="btn btn-primary" type="button" title="Add" ng-click="tariffCtrl.add()"> Add </button>  </td>
+            	<!-- <pre>Par1 = <span ng-bind="setUGName()"></span>, <span ng-bind="setUGSName()"></span></pre> -->
+  			</form>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

@@ -17,10 +17,10 @@
                     controller: 'qualityController',
                     controllerAs: 'qualityCtrl'
                 })
-                .when('/dataEntry', {
-                    templateUrl: 'dataEntry/dataEntry.html',
-                    controller: 'dataEntryController',
-                    controllerAs: 'dataEntryCtrl'
+                .when('/tariffManagement', {
+                    templateUrl: 'tariffManagement/tariffManagement.html',
+                    controller: 'tariffManagementController',
+                    controllerAs: 'tariffCtrl'
                 })
                 .otherwise({
                     templateUrl: 'dashboard/dashboard.html',
