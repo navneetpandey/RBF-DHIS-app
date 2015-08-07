@@ -147,7 +147,6 @@
             }
         };
     }
-
     function getDataElements($http, apiURL) {
         $http.get(apiURL + '/api/dataElements.json', {cache: true})
             .then(function (response) {
@@ -157,5 +156,4 @@
             console.log('couldn\'t able to get data value ' + error);
         });
     }
-
 })();
